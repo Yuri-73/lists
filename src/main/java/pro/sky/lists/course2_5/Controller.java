@@ -1,15 +1,17 @@
 package pro.sky.lists.course2_5;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 @RestController
+@RequestMapping("/person")
 public class Controller {
     private final EmployeeService employeeService;
     public Controller(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    @GetMapping(path = "/person")
+    @GetMapping(path = "")
     public String GetPersonInfo(@RequestParam(required = false) Integer number) { //(required = false) необходимо, чтобы компиллятор мог выявлять null
         try {
             final String person;
@@ -24,7 +26,7 @@ public class Controller {
             System.out.println("Работа метода GetPersonInfo закончена");
         }
     }
-    @GetMapping(path = "/person/add")
+    @GetMapping(path = "/add")
     public String addPerson(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String surname) {
@@ -38,7 +40,7 @@ public class Controller {
         }
     }
 
-    @GetMapping(path = "/person/remove")
+    @GetMapping(path = "/remove")
     public String removePerson(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String surname) {
@@ -51,7 +53,7 @@ public class Controller {
             return e.getMessage();
         }
     }
-    @GetMapping(path = "/person/find")
+    @GetMapping(path = "/find")
     public String findPerson(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String surname) {
@@ -64,7 +66,7 @@ public class Controller {
             return e.getMessage();
         }
     }
-    @GetMapping(path = "/person/list")
+    @GetMapping(path = "/list")
     public String listAllEmployee() {
         return employeeService.listPerson();
     }
